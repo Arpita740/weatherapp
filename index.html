@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Weather App</title>
-    <style>
+    <!-- <style>
         body {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             transition: background-image 0.5s ease;
         }
-    </style>
+    </style> -->
 </head>
 <body>
     <div class="card">
@@ -44,19 +44,25 @@
                 </div>
             </div>
         </div>
+        <div class="forecast">
+          
+        </div>
     </div>
     <script>
         const apiKey = "92d1431e7c5b43195be34f2f1cb5037d";
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&q=";
 
         const searchBox = document.querySelector(".search input");
         const searchBtn = document.querySelector(".search button");
         const weatherIcon = document.querySelector(".weather-icon");
         const errorDiv = document.querySelector(".error");
         const weatherDiv = document.querySelector(".weather");
+        const forecastDiv = document.querySelector(".forecast");
 
        
-        // Function to set a random background image
+
+        
         function setRandomBackground() {
             const randomIndex = Math.floor(Math.random() * backgroundImages.length);
             document.body.style.backgroundImage = backgroundImages[randomIndex];
@@ -68,6 +74,7 @@
             if (response.status === 404) {
                 errorDiv.style.display = "block";
                 weatherDiv.style.display = "none";
+                forecastDiv.innerHTML = ""; 
             } else {
                 errorDiv.style.display = "none";
                 weatherDiv.style.display = "block";
@@ -80,7 +87,7 @@
                 document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
                 document.querySelector(".wind").innerHTML = data.wind.speed + " km/hr";
 
-                const weatherMain = data.weather[0].main.toLowerCase(); // Convert to lowercase
+                const weatherMain = data.weather[0].main.toLowerCase(); 
 
                 if (weatherMain === "clouds") {
                     weatherIcon.src = "images/clouds.png";
@@ -93,6 +100,38 @@
                 } else if (weatherMain === "mist") {
                     weatherIcon.src = "images/mist.png";
                 }
+
+               
+                fetchForecast(city);
+            }
+        }
+
+        async function fetchForecast(city) {
+            const response = await fetch(forecastApiUrl + city + `&appid=${apiKey}`);
+            const data = await response.json();
+
+           
+            forecastDiv.innerHTML = "";
+
+           
+            for (let i = 0; i < data.list.length; i++) {
+                if (i % 8 === 0) {
+                    const forecastItem = data.list[i];
+                    const forecastDate = new Date(forecastItem.dt * 1000); 
+
+                    const forecastElement = document.createElement("div");
+                    forecastElement.classList.add("forecast-item");
+
+                    const dateElement = document.createElement("p");
+                    dateElement.textContent = forecastDate.toLocaleDateString();
+                    forecastElement.appendChild(dateElement);
+
+                    const tempElement = document.createElement("p");
+                    tempElement.textContent = Math.round(forecastItem.main.temp) + "°C";
+                    forecastElement.appendChild(tempElement);
+
+                    forecastDiv.appendChild(forecastElement);
+                }
             }
         }
 
@@ -100,10 +139,8 @@
             checkWeather(searchBox.value);
         });
 
-        // Set a random background when the page loads
-        setRandomBackground();
+      
         
-        // Initial weather check (you can replace this with a default city)
         checkWeather("Kolkata");
     </script>
 </body>
