@@ -133,3 +133,22 @@ body {
     font-size: 18px;
 }
 
+@media screen and (max-width: 600px) {
+    .card {
+        width: 90%;
+        max-width: 300px; /* Adjust as needed for smaller screens */
+        margin-top: 50px; /* Adjust as needed for spacing */
+    }
+    .search {
+        flex-direction: column;
+        align-items: center;
+    }
+    .search input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .forecast-item {
+        flex-basis: calc(50% - 10px);
+        margin: 5px;
+    }
+}
