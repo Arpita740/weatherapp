@@ -1,0 +1,135 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222;
+}
+
+.card {
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff;
+    margin: 100px auto 0;
+    padding: 40px 35px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search input {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    padding: 10px 25px;
+    height: 60px;
+    margin-right: 16px;
+    width: 70%;
+    border-radius: 30px;
+    flex: 1;
+    color: #555;
+    font-size: 18px;
+}
+
+.search button {
+    background-color: #ebfffc;
+    border: 0;
+    width: 60px;
+    outline: 0;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url("images/search.png"); 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.weather h1 {
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.weather h2 {
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.weather-icon {
+    width: 170px;
+    margin-top: 30px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.humidity,
+.wind {
+    font-size: 28px;
+    margin-top: -6px;
+}
+
+.error {
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+.forecast {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.forecast-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    flex-basis: calc(33.33% - 10px);
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.forecast-item p:first-child {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.forecast-item p:last-child {
+    font-size: 18px;
+}
+
